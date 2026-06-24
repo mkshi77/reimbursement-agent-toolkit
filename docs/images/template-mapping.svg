@@ -13,7 +13,7 @@
   </defs>
 
   <rect x="40" y="50" width="220" height="150" class="box"/>
-  <text x="150" y="82" text-anchor="middle" class="title">公司报销模板</text>
+  <text x="150" y="82" text-anchor="middle" class="title">公司报销表格</text>
   <rect x="70" y="105" width="160" height="26" class="small"/>
   <text x="150" y="123" text-anchor="middle" class="text">申请人：B3</text>
   <rect x="70" y="140" width="160" height="26" class="small"/>
@@ -21,7 +21,7 @@
   <line x1="260" y1="125" x2="355" y2="125" class="arrow"/>
 
   <rect x="360" y="50" width="250" height="150" class="box"/>
-  <text x="485" y="82" text-anchor="middle" class="title">template-map.json</text>
+  <text x="485" y="82" text-anchor="middle" class="title">记住填写位置</text>
   <text x="485" y="118" text-anchor="middle" class="text">申请人 -> B3</text>
   <text x="485" y="146" text-anchor="middle" class="text">金额 -> E10:E29</text>
   <text x="485" y="174" text-anchor="middle" class="text">类别 -> C10:C29</text>
@@ -29,8 +29,7 @@
 
   <rect x="710" y="50" width="230" height="150" class="box"/>
   <text x="825" y="82" text-anchor="middle" class="title">生成报销表</text>
-  <text x="825" y="118" text-anchor="middle" class="text">不硬编码单元格</text>
-  <text x="825" y="146" text-anchor="middle" class="text">模板变化时</text>
-  <text x="825" y="174" text-anchor="middle" class="text">只更新映射</text>
+  <text x="825" y="118" text-anchor="middle" class="text">下次直接复用</text>
+  <text x="825" y="146" text-anchor="middle" class="text">表格变更时</text>
+  <text x="825" y="174" text-anchor="middle" class="text">再重新识别</text>
 </svg>
-

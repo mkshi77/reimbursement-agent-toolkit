@@ -12,4 +12,6 @@ When using Claude Code:
 
 Do not finalize a reimbursement form until the user has confirmed the per-item review table or explicitly accepted the suggested selections.
 
-Prefer natural user prompts over command-style prompts. If the user says "I uploaded the reimbursement files and template, start organizing", infer the materials folder and template from the available files, then ask only for missing company rules or ambiguous template mappings.
+Prefer natural user prompts over command-style prompts. If the user says "I uploaded the reimbursement files and company form, start organizing", infer the materials and company Excel form from the available files, then ask only for missing company rules or ambiguous form fields.
+
+If the user sends receipts and forms directly in chat, save the attachments into a working folder before running scripts. If prior company configuration exists, reuse it unless the user says the company form or reimbursement rules changed.
