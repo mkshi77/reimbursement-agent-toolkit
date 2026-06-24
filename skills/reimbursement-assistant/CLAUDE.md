@@ -12,3 +12,4 @@ When using Claude Code:
 
 Do not finalize a reimbursement form until the user has confirmed the per-item review table or explicitly accepted the suggested selections.
 
+Prefer natural user prompts over command-style prompts. If the user says "I uploaded the reimbursement files and template, start organizing", infer the materials folder and template from the available files, then ask only for missing company rules or ambiguous template mappings.

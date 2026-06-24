@@ -6,6 +6,16 @@ This toolkit is agent-agnostic. Any agent that can read files and run Python can
 
 Prepare a reimbursement package from loose materials while minimizing user decisions.
 
+## Natural User Requests
+
+Users should not need to know script names or JSON file names. Treat requests like these as sufficient:
+
+- "I uploaded my reimbursement materials and company Excel template. Start organizing them."
+- "The reimbursement files are in `materials/`; the company template is `template.xlsx`. Please identify every expense and show me the confirmation table first."
+- "Help me organize this travel reimbursement folder. If company rules are missing, ask me only for the missing rules."
+
+When the user provides only materials and a template, create draft company/profile/policy questions instead of stopping.
+
 ## Required Behavior
 
 1. Do the mechanical work first: scan, extract, classify, validate, and draft outputs.
@@ -40,5 +50,4 @@ Each row must show:
 
 `include | date | merchant | amount | category | invoice_id | source_file | confidence | reason`
 
-Only ask the user about rows marked `review`, rows with warnings, and any included row the user wants to edit.
-
+Only ask the user about rows marked `review`, rows with warnings, missing company rules, ambiguous template mappings, and any included row the user wants to edit.
