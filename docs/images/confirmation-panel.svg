@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="300" viewBox="0 0 980 300" role="img" aria-label="Line item confirmation panel">
+  <defs>
+    <style>
+      .bg{fill:#ffffff;stroke:#cbd5e1;stroke-width:1.5;rx:10}
+      .head{fill:#eff6ff}
+      .text{font-family:Arial,sans-serif;font-size:13px;fill:#0f172a}
+      .muted{font-family:Arial,sans-serif;font-size:12px;fill:#64748b}
+      .ok{fill:#dcfce7}
+      .review{fill:#fef9c3}
+      .exclude{fill:#fee2e2}
+      .line{stroke:#e2e8f0}
+    </style>
+  </defs>
+  <rect x="20" y="30" width="940" height="240" class="bg"/>
+  <rect x="20" y="30" width="940" height="42" class="head"/>
+  <text x="40" y="56" class="text" font-weight="700">Expense Review Table</text>
+  <text x="40" y="95" class="muted">Include</text>
+  <text x="115" y="95" class="muted">Date</text>
+  <text x="220" y="95" class="muted">Merchant / Route</text>
+  <text x="470" y="95" class="muted">Amount</text>
+  <text x="570" y="95" class="muted">Category</text>
+  <text x="710" y="95" class="muted">Confidence</text>
+  <text x="820" y="95" class="muted">Source</text>
+  <line x1="20" y1="108" x2="960" y2="108" class="line"/>
+  <rect x="36" y="124" width="42" height="24" class="ok"/>
+  <text x="49" y="141" class="text">yes</text>
+  <text x="115" y="141" class="text">2026-06-10</text>
+  <text x="220" y="141" class="text">Didi ride to railway station</text>
+  <text x="470" y="141" class="text">38.50</text>
+  <text x="570" y="141" class="text">local_transport</text>
+  <text x="710" y="141" class="text">0.88</text>
+  <text x="820" y="141" class="text">wechat-01.png</text>
+  <line x1="20" y1="158" x2="960" y2="158" class="line"/>
+  <rect x="36" y="174" width="56" height="24" class="review"/>
+  <text x="47" y="191" class="text">review</text>
+  <text x="115" y="191" class="text">2026-06-11</text>
+  <text x="220" y="191" class="text">Hotel Example Hangzhou</text>
+  <text x="470" y="191" class="text">420.00</text>
+  <text x="570" y="191" class="text">lodging</text>
+  <text x="710" y="191" class="text">0.94</text>
+  <text x="820" y="191" class="text">hotel.pdf</text>
+  <text x="115" y="215" class="muted">Warning: buyer name mismatch. User must confirm before finalization.</text>
+  <line x1="20" y1="228" x2="960" y2="228" class="line"/>
+  <rect x="36" y="244" width="54" height="24" class="exclude"/>
+  <text x="47" y="261" class="text">exclude</text>
+  <text x="115" y="261" class="text">2026-06-11</text>
+  <text x="220" y="261" class="text">Wechat transfer to friend</text>
+  <text x="470" y="261" class="text">200.00</text>
+  <text x="570" y="261" class="text">non_reimbursable</text>
+  <text x="710" y="261" class="text">0.80</text>
+  <text x="820" y="261" class="text">wechat-02.png</text>
+</svg>
+

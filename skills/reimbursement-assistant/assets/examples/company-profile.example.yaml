@@ -1,0 +1,11 @@
+company_name: Example Technology Co., Ltd.
+tax_id: "91310000EXAMPLE001"
+aliases:
+  - Example Tech
+address: "Example Road 1, Shanghai"
+phone: "021-00000000"
+bank_name: "Example Bank Shanghai Branch"
+bank_account: "6222000000000000000"
+default_department: "Operations"
+default_payment_method: "Bank transfer"
+

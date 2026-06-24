@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/reimbursement/template-map.schema.json",
+  "title": "Excel Template Map",
+  "type": "object",
+  "required": ["template_type", "sheets"],
+  "properties": {
+    "template_type": {"type": "string"},
+    "version": {"type": "string"},
+    "sheets": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "object",
+            "additionalProperties": {"type": "string"}
+          },
+          "expense_table": {
+            "type": "object",
+            "properties": {
+              "start_row": {"type": "integer"},
+              "max_rows": {"type": "integer"},
+              "columns": {
+                "type": "object",
+                "additionalProperties": {"type": "string"}
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}
+

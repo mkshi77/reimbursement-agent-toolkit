@@ -1,0 +1,24 @@
+policy_name: Default domestic travel policy
+currency: CNY
+claim_types:
+  travel_domestic:
+    require_preapproval: true
+    meal_subsidy:
+      mode: per_day
+      amount: 100
+    local_transport_subsidy:
+      mode: per_day
+      amount: 80
+    intercity_transport:
+      mode: actual
+      requires_invoice: true
+    lodging:
+      mode: actual
+      requires_invoice: true
+    payment_record_required: true
+review_rules:
+  low_confidence_threshold: 0.8
+  require_review_for_payment_only: true
+  require_review_for_out_of_range_date: true
+  require_review_for_tax_mismatch: true
+

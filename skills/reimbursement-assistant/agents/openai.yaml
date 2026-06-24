@@ -1,0 +1,4 @@
+display_name: Reimbursement Assistant
+short_description: Organize receipts, payment screenshots, templates, and company rules into checked reimbursement packages.
+default_prompt: "Organize this reimbursement material folder, classify every expense, show me the review table, validate company rules, and generate the reimbursement package."
+

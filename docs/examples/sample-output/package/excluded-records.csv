@@ -1,0 +1,2 @@
+﻿included,date,merchant,amount,category,invoice_number,evidence_type,source_file,confidence,suggested_action,reason,warnings
+False,2026-06-11,Wechat transfer to friend,200.0,non_reimbursable,WX2026061101,payment_record,wechat-screenshot-02.png,0.8,exclude,"Likely transfer, refund, income, or private item.",

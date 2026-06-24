@@ -1,0 +1,15 @@
+{
+  "input": "C:\\Users\\44635\\Documents\\Codex\\2026-06-24\\zhe\\work\\reimbursement-agent-toolkit\\docs\\examples\\sample-materials",
+  "file_count": 1,
+  "files": [
+    {
+      "path": "C:\\Users\\44635\\Documents\\Codex\\2026-06-24\\zhe\\work\\reimbursement-agent-toolkit\\docs\\examples\\sample-materials\\sample-expenses.csv",
+      "relative_path": "sample-expenses.csv",
+      "name": "sample-expenses.csv",
+      "extension": ".csv",
+      "kind": "spreadsheet",
+      "size_bytes": 680,
+      "sha256": "9543b2a1fcb3ac681074745fe8fefbc78c92625781bb93fcc22867bd7e67c8cb"
+    }
+  ]
+}

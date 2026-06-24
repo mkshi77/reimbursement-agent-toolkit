@@ -1,0 +1,5 @@
+date,merchant,amount,category,invoice_number,buyer_name,buyer_tax_id,evidence_type,confidence,source_file
+2026-06-10,Didi ride to railway station,38.50,local_transport,DD2026061001,"Example Technology Co., Ltd.",91310000EXAMPLE001,payment_record,0.88,didi-screenshot-01.png
+2026-06-10,Shanghai Hongqiao to Hangzhou East,73.00,intercity_transport,T2026061001,"Example Technology Co., Ltd.",91310000EXAMPLE001,train_ticket,0.91,train-ticket-01.pdf
+2026-06-11,Hotel Example Hangzhou,420.00,lodging,H2026061101,Wrong Company Name,91310000EXAMPLE001,invoice,0.94,hotel-invoice.pdf
+2026-06-11,Wechat transfer to friend,200.00,,WX2026061101,,,payment_record,0.8,wechat-screenshot-02.png

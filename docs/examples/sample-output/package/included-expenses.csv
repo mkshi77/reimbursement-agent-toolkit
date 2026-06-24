@@ -1,0 +1,4 @@
+﻿included,date,merchant,amount,category,invoice_number,evidence_type,source_file,confidence,suggested_action,reason,warnings
+True,2026-06-10,Didi ride to railway station,38.5,local_transport,DD2026061001,payment_record,didi-screenshot-01.png,0.88,include,Likely reimbursable.,
+True,2026-06-10,Shanghai Hongqiao to Hangzhou East,73.0,intercity_transport,T2026061001,train_ticket,train-ticket-01.pdf,0.91,include,Likely reimbursable.,
+True,2026-06-11,Hotel Example Hangzhou,420.0,lodging,H2026061101,invoice,hotel-invoice.pdf,0.94,include,Likely reimbursable.,

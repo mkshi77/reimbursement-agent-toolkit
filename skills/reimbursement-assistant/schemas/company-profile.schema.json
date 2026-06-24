@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/reimbursement/company-profile.schema.json",
+  "title": "Company Profile",
+  "type": "object",
+  "required": ["company_name"],
+  "properties": {
+    "company_name": {"type": "string"},
+    "tax_id": {"type": "string"},
+    "aliases": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "address": {"type": "string"},
+    "phone": {"type": "string"},
+    "bank_name": {"type": "string"},
+    "bank_account": {"type": "string"},
+    "default_department": {"type": "string"},
+    "default_payment_method": {"type": "string"}
+  },
+  "additionalProperties": true
+}
+

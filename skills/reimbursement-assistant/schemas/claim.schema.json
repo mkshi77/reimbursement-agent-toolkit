@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/reimbursement/claim.schema.json",
+  "title": "Reimbursement Claim",
+  "type": "object",
+  "required": ["records"],
+  "properties": {
+    "claim": {
+      "type": "object",
+      "properties": {
+        "claim_type": {"type": "string"},
+        "applicant": {"type": "string"},
+        "department": {"type": "string"},
+        "project": {"type": "string"},
+        "budget_item": {"type": "string"},
+        "start_date": {"type": "string"},
+        "end_date": {"type": "string"},
+        "origin": {"type": "string"},
+        "destination": {"type": "string"},
+        "purpose": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "source_file"],
+        "properties": {
+          "id": {"type": "string"},
+          "source_file": {"type": "string"},
+          "date": {"type": "string"},
+          "merchant": {"type": "string"},
+          "amount": {"type": ["number", "string", "null"]},
+          "currency": {"type": "string", "default": "CNY"},
+          "category": {"type": "string"},
+          "subcategory": {"type": "string"},
+          "invoice_code": {"type": "string"},
+          "invoice_number": {"type": "string"},
+          "buyer_name": {"type": "string"},
+          "buyer_tax_id": {"type": "string"},
+          "seller_name": {"type": "string"},
+          "route_from": {"type": "string"},
+          "route_to": {"type": "string"},
+          "payment_method": {"type": "string"},
+          "evidence_type": {"type": "string"},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "suggested_action": {"type": "string", "enum": ["include", "review", "exclude"]},
+          "included": {"type": "boolean"},
+          "reason": {"type": "string"},
+          "warnings": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}
+

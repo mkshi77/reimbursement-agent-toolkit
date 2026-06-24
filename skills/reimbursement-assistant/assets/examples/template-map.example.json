@@ -1,0 +1,32 @@
+{
+  "template_type": "travel_domestic",
+  "version": "example-2026-06",
+  "sheets": {
+    "Reimbursement": {
+      "fields": {
+        "claim.applicant": "B3",
+        "claim.department": "D3",
+        "claim.start_date": "B7",
+        "claim.end_date": "C7",
+        "claim.origin": "D7",
+        "claim.destination": "E7",
+        "claim.project": "B20",
+        "payment.bank_name": "C25",
+        "payment.bank_account": "E25"
+      },
+      "expense_table": {
+        "start_row": 10,
+        "max_rows": 20,
+        "columns": {
+          "date": "A",
+          "merchant": "B",
+          "category": "C",
+          "invoice_number": "D",
+          "amount": "E",
+          "reason": "F"
+        }
+      }
+    }
+  }
+}
+

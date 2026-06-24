@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="260" viewBox="0 0 980 260" role="img" aria-label="Template mapping">
+  <defs>
+    <style>
+      .box{fill:#f8fafc;stroke:#0f766e;stroke-width:2;rx:10}
+      .small{fill:#ecfeff;stroke:#0891b2;stroke-width:1.5;rx:8}
+      .text{font-family:Arial,sans-serif;font-size:14px;fill:#0f172a}
+      .title{font-family:Arial,sans-serif;font-size:18px;font-weight:700;fill:#0f172a}
+      .arrow{stroke:#64748b;stroke-width:2;marker-end:url(#m)}
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect x="40" y="50" width="220" height="150" class="box"/>
+  <text x="150" y="82" text-anchor="middle" class="title">Company Template</text>
+  <rect x="70" y="105" width="160" height="26" class="small"/>
+  <text x="150" y="123" text-anchor="middle" class="text">Applicant: B3</text>
+  <rect x="70" y="140" width="160" height="26" class="small"/>
+  <text x="150" y="158" text-anchor="middle" class="text">Expense table: row 10</text>
+  <line x1="260" y1="125" x2="355" y2="125" class="arrow"/>
+  <rect x="360" y="50" width="250" height="150" class="box"/>
+  <text x="485" y="82" text-anchor="middle" class="title">template-map.json</text>
+  <text x="485" y="118" text-anchor="middle" class="text">claim.applicant -> B3</text>
+  <text x="485" y="146" text-anchor="middle" class="text">amount -> E10:E29</text>
+  <text x="485" y="174" text-anchor="middle" class="text">category -> C10:C29</text>
+  <line x1="610" y1="125" x2="705" y2="125" class="arrow"/>
+  <rect x="710" y="50" width="230" height="150" class="box"/>
+  <text x="825" y="82" text-anchor="middle" class="title">Filled Workbook</text>
+  <text x="825" y="118" text-anchor="middle" class="text">No hard-coded cells</text>
+  <text x="825" y="146" text-anchor="middle" class="text">Template changes only</text>
+  <text x="825" y="174" text-anchor="middle" class="text">update mapping</text>
+</svg>
+
