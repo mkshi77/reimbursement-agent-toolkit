@@ -59,6 +59,60 @@ cp -R skills/reimbursement-assistant ~/.codex/skills/
 
 核心能力都在 `scripts/`、`schemas/`、`references/` 中，不依赖某一个 Agent 平台。
 
+## 如何调用
+
+### 在 Codex 里调用
+
+安装并重启 Codex 后，不需要手动运行脚本，直接在对话里说：
+
+> 使用出差报销工具，我上传了报销材料和公司报销表格，请开始整理。先识别每一笔费用并生成确认表。
+
+也可以直接点名 skill：
+
+> 用 `reimbursement-assistant` 整理这次差旅报销。材料在 `D:\报销材料\6月杭州出差`，公司报销表格在 `D:\公司模板\差旅报销.xlsx`。
+
+Codex 看到“出差报销工具”“reimbursement-assistant”“报销材料”“发票”“付款截图”“公司报销表格”等表达时，会加载这个 skill。
+
+### 在聊天窗口直接发材料
+
+如果 Agent 支持上传附件，用户可以直接把发票、微信截图、PDF、火车票、打车票、公司报销表格发到对话框，然后说：
+
+> 我把报销材料和公司报销表格都发上来了，请开始整理。先给我逐笔确认表，不要直接生成最终报销单。
+
+Agent 应把附件保存到工作目录，再按 `AGENT.md` 的流程扫描、识别、分类和确认。
+
+### 在 Claude Code / OpenClaw / Hermes 里调用
+
+让 Agent 读取通用入口：
+
+```text
+skills/reimbursement-assistant/AGENT.md
+```
+
+然后说：
+
+> 按 `AGENT.md` 的流程帮我整理报销。我上传了报销材料和公司 Excel 报销表格；如果缺少公司规则，只问我缺失项。
+
+Claude Code 可以优先读取：
+
+```text
+skills/reimbursement-assistant/CLAUDE.md
+```
+
+### 第一次和第二次调用的区别
+
+第一次使用时，通常需要提供公司报销表格、开票信息和报销规则。Agent 会生成或更新：
+
+- `company-profile.yaml`
+- `travel-policy.yaml`
+- `template-map.json`
+
+第二次同一家公司使用时，可以直接说：
+
+> 还是用上次的公司配置和报销表格，我这次上传了新的报销材料，请开始整理。
+
+只有公司报销表格、税号、开票信息或补贴规则发生变化时，才需要重新确认。
+
 ## 第一次使用前准备
 
 用户至少需要提供：
