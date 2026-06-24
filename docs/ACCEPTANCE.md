@@ -7,7 +7,8 @@ This document records the release gate used for the first toolkit version.
 Passed when:
 
 - The Codex `SKILL.md` validates with `quick_validate.py`.
-- The skill starts with an intake checklist before the full pipeline.
+- The skill starts with a chat intake checklist before any long-running OCR, extraction, classification, validation, filling, or packaging.
+- The agent waits for user confirmation before saving to a default folder or starting long processing, unless the user explicitly requested full-auto mode.
 - Chat attachments or supplied folders can be copied into a timestamped run folder.
 - The command-line workflow runs end to end on sample materials.
 - Scripts produce machine-readable JSON and user-readable reports.
@@ -31,10 +32,11 @@ python scripts/fill_template.py --input RUN_DIR/review/classified.json --templat
 Passed when:
 
 - The agent first shows a short startup checklist with materials, company form, company profile, policy, and output location status.
+- The first response is in the chat, not a generated Markdown/CSV file.
 - Missing inputs are explained with a specific next action; the user is not expected to infer what to upload.
-- Uploaded files are saved or copied into a visible run folder before processing.
-- Every extracted line item is available for user review.
-- The user review surface is a checkbox-style checklist with stable record IDs.
+- Uploaded files are saved or copied into a visible run folder only after the user accepts the default path or supplies another path.
+- Every extracted line item is available for user review directly in the chat.
+- The primary user review surface is a chat checkbox-style checklist with stable record IDs; generated files are backup/output only.
 - Low-confidence, payment-only, tax mismatch, duplicate, and visual-only records are not silently included.
 - Obvious exclusions remain visible but do not block unrelated reimbursable records.
 

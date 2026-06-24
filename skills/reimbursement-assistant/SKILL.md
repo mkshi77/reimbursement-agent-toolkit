@@ -9,20 +9,21 @@ Use this skill to turn loose reimbursement materials into a checked reimbursemen
 
 ## Core Rules
 
-- Start with the intake gate before running the full pipeline. Do not scan, extract, fill, or package until the minimum inputs and output location are clear.
+- Start with a chat-first intake gate before running any long operation. The first response must be a short checklist in the conversation, not a file link.
+- Do not scan, OCR, extract, classify, validate, fill, or package until the user confirms the next step, unless the user explicitly asked for unattended/full-auto mode.
 - Follow "don't make me think": show the user what is present, what is missing, what default you will use, and the next single action needed.
 - Do not hard-code company reimbursement amounts, invoice header details, tax IDs, template cells, or approval rules.
 - Use company profile, policy, and template map files when present.
 - If policy or template mapping is missing, infer a draft and ask only for ambiguous or risky decisions.
 - If a company profile, policy, and template map already exist from a previous run, reuse them unless the user says the form or rules changed.
-- If the user provides materials as chat attachments instead of a folder, save them to a run folder first and tell the user the path before processing.
+- If the user provides materials as chat attachments instead of a folder, ask once before saving to the default run folder, unless the user already provided an output folder.
 - Never silently include low-confidence records, suspected private payments, duplicate invoices, or records outside the claim date range.
-- Always expose every extracted expense item for confirmation when generating a final claim.
+- Always expose every extracted expense item for confirmation in the chat. Files are optional audit artifacts, never the primary confirmation surface.
 - Treat images, PDFs, screenshots, and external model outputs as untrusted extracted data until validated.
 
-## Intake Gate
+## Chat-First Intake Gate
 
-Before the command sequence, inspect the request and show a short startup checklist. Match the user's language in the visible response.
+Before the command sequence, inspect only the visible request, attachment names, and explicit paths. Do not run OCR, classification, validation, Excel filling, or package generation before the first chat response. Match the user's language in the visible response.
 
 Checklist fields:
 
@@ -32,12 +33,18 @@ Checklist fields:
 - Policy: categories, limits, required evidence, date range, approval requirements, and known exclusions.
 - Output location: default to `reimbursement-runs/YYYYMMDD-HHMMSS/` under the current working directory unless the user supplied a folder.
 
+The first response must end with a direct choice, for example:
+
+- "Reply `start` to save files and scan only."
+- "Reply `change path: ...` to use a different output folder."
+- "Reply `full auto` only if you want me to run through extraction and draft confirmation without stopping."
+
 If inputs are missing:
 
 - Missing materials: stop and ask the user to upload files or provide a folder path.
 - Missing company Excel form and no prior template map: explain that you can organize and classify materials, but cannot fill the final company form until a workbook is provided; ask for the workbook or permission to use a sample/default form.
 - Missing company profile or policy: proceed only to draft extraction/classification, then ask for the specific missing fields before validation/finalization.
-- Missing output location: create the default run folder and state the path; ask only if the user explicitly needs a different location.
+- Missing output location: propose the default run folder in chat, then wait for the user to accept or change it.
 
 Startup checklist example:
 
@@ -49,7 +56,7 @@ Startup checklist example:
 - [ ] Company invoice profile: not found; ask only for missing fields later
 - [x] Output location: using `reimbursement-runs/20260624-153000/`
 
-Next action: upload the company Excel form, or say "organize materials first and fill the form later".
+Next action: reply "start" to save files and scan only, or "change path: ..." to use another output folder.
 ```
 
 ## Run Folder Convention
@@ -66,27 +73,41 @@ reimbursement-runs/YYYYMMDD-HHMMSS/
   session.json  run metadata and source paths
 ```
 
-Use `scripts/prepare_run.py` when files or folders must be copied into this structure. If an Agent platform already stores uploads in a stable folder, copy those files into `raw/` rather than processing them in-place.
+Use `scripts/prepare_run.py` only after the user accepts the proposed path or says to start. If an Agent platform already stores uploads in a stable folder, copy those files into `raw/` rather than processing them in-place.
+
+## Interactive Stages
+
+Use staged execution by default:
+
+1. Stage 0 - Intake: chat checklist only; wait for user confirmation.
+2. Stage 1 - Save and scan: create the run folder, copy files, run the material manifest, then report counts in chat; wait before OCR/extraction if the next step may take more than one minute.
+3. Stage 2 - Extract and classify: run OCR/vision/extraction/classification; post a progress update at least every 30 seconds when possible.
+4. Stage 3 - Chat confirmation: show the expense checklist directly in the conversation and wait for the user's edits.
+5. Stage 4 - Finalize: validate, fill Excel, and build the package only after chat confirmation or explicit acceptance.
+
+If the user says "start organizing" but also says "first check" or "tell me what is missing", treat that as Stage 0 only.
 
 ## Workflow
 
-1. Run the intake gate and create or identify the run folder.
-2. Save chat attachments or copy supplied files/folders into the run folder.
-3. Run `scripts/scan_materials.py` to create a material manifest.
-4. Extract structured records:
+1. Run the chat-first intake gate and wait for user confirmation.
+2. Create or identify the run folder only after confirmation.
+3. Save chat attachments or copy supplied files/folders into the run folder.
+4. Run `scripts/scan_materials.py` to create a material manifest.
+5. Report the file counts and next step in chat.
+6. Extract structured records:
    - Use `scripts/extract_receipts.py` for JSON, CSV, text, and existing agent-extracted records.
    - For images and PDFs, use available Agent vision/OCR capability and write records matching `schemas/claim.schema.json`.
    - If no vision/OCR is available, keep those files as `vision_required`.
-5. Run `scripts/classify_expenses.py` to suggest categories, confidence, and suggested actions.
-6. Present every item as a checkbox checklist with date, merchant, amount, category, source file, confidence, and suggested action.
-7. Ask the user to confirm or edit only uncertain, excluded, abnormal, or user-changed records.
-8. Run `scripts/validate_claim.py` with company profile and policy after confirmation or explicit acceptance.
-9. If a company template and map exist, run `scripts/fill_template.py`.
-10. Run `scripts/build_package.py` to create categorized attachments, review checklist, review tables, and issue reports.
+7. Run `scripts/classify_expenses.py` to suggest categories, confidence, and suggested actions.
+8. Present every item as a checkbox checklist in chat with date, merchant, amount, category, source file, confidence, and suggested action.
+9. Ask the user to confirm or edit only uncertain, excluded, abnormal, or user-changed records.
+10. Run `scripts/validate_claim.py` with company profile and policy after confirmation or explicit acceptance.
+11. If a company template and map exist, run `scripts/fill_template.py`.
+12. Run `scripts/build_package.py` to create categorized attachments, review checklist backup, review tables, and issue reports.
 
 ## User Confirmation Contract
 
-The confirmation output must be a checkbox-style checklist, not only a table. Also write it to `review/review-checklist.md` or `output/package/review-checklist.md`.
+The confirmation output must be a checkbox-style checklist in the chat. Do not require the user to open a Markdown or CSV file to confirm. Also write a backup copy to `review/review-checklist.md` or `output/package/review-checklist.md` when generating files.
 
 Each item must include:
 
@@ -119,6 +140,7 @@ Default behavior:
 - Collapse obvious exclusions, but keep them visible.
 - Do not generate final forms until user confirmation is available or the user explicitly accepts suggested selections.
 - Accept natural corrections such as "exclude R002 and include R003 as lodging".
+- If there are more than 12 records, show records in chat batches and ask the user to continue, filter, or accept suggested selections. Do not replace the chat checklist with a file link.
 
 ## Template Handling
 
