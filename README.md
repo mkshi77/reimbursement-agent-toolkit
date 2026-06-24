@@ -1,6 +1,6 @@
 # 出差报销工具
 
-> 英文仓库名保留为 `reimbursement-agent-toolkit`，方便 GitHub 克隆、命令行安装和跨 Agent 调用；中文用户看到的产品名统一叫「出差报销工具」。
+> 英文名为 `reimbursement-agent-toolkit`，方便 GitHub 克隆、命令行安装和跨 Agent 调用；中文用户看到的产品名统一叫「出差报销工具」。
 
 跨 Agent 可用的报销材料整理工具包。Codex skill 只是其中一个入口，Claude Code、OpenClaw、Hermes 或其他能读文件并运行 Python 脚本的 Agent 也可以使用。
 
