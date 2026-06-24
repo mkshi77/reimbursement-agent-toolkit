@@ -45,6 +45,57 @@ def copy_sources(records, out_dir):
     return copied
 
 
+def checklist_line(record, checked):
+    marker = "x" if checked else " "
+    record_id = record.get("id") or ""
+    date = record.get("date") or ""
+    merchant = record.get("merchant") or record.get("route") or ""
+    amount = record.get("amount") or ""
+    category = record.get("category") or "unclassified"
+    source = record.get("source_file") or ""
+    confidence = record.get("confidence")
+    confidence_text = "" if confidence in (None, "") else f" | 置信度：{confidence}"
+    reason = record.get("reason") or ""
+    warnings = "; ".join(record.get("warnings") or [])
+    note = " | ".join(part for part in [reason, warnings] if part)
+    note_text = f" | {note}" if note else ""
+    return f"- [{marker}] {record_id} | {date} | {merchant} | {amount} | {category} | 来源：{source}{confidence_text}{note_text}"
+
+
+def write_review_checklist(records, out):
+    lines = ["# 报销逐笔确认清单", ""]
+    lines.append("勾选要纳入报销的记录。疑似私人支出、重复票据、低置信度或异常记录在确认前保持未勾选。")
+    lines.append("")
+    lines.append("## 建议纳入")
+    lines.append("")
+    suggested = [r for r in records if r.get("included")]
+    if suggested:
+        for record in suggested:
+            lines.append(checklist_line(record, True))
+    else:
+        lines.append("- 暂无建议纳入记录。")
+    lines.append("")
+    lines.append("## 需要确认")
+    lines.append("")
+    review = [r for r in records if r.get("suggested_action") == "review"]
+    if review:
+        for record in review:
+            lines.append(checklist_line(record, False))
+    else:
+        lines.append("- 暂无需要确认记录。")
+    lines.append("")
+    lines.append("## 建议排除")
+    lines.append("")
+    excluded = [r for r in records if r.get("suggested_action") == "exclude"]
+    if excluded:
+        for record in excluded:
+            lines.append(checklist_line(record, False))
+    else:
+        lines.append("- 暂无建议排除记录。")
+    lines.append("")
+    (out / "review-checklist.md").write_text("\n".join(lines), encoding="utf-8")
+
+
 def build(input_json, materials_json, out_dir):
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -58,6 +109,7 @@ def build(input_json, materials_json, out_dir):
     write_csv(out / "included-expenses.csv", included, FIELDS)
     write_csv(out / "review-required.csv", review, FIELDS)
     write_csv(out / "excluded-records.csv", excluded, FIELDS)
+    write_review_checklist(records, out)
     copied = copy_sources(records, out)
     write_json(out / "attachment-copy-map.json", copied)
 
@@ -88,4 +140,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
